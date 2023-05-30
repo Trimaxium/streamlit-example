@@ -15,7 +15,9 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+import streamlit as st
 import random
+from streamlit import session_state as state
 
 class Pokemon:
     def __init__(self, name, health, attack):
@@ -37,22 +39,25 @@ def battle(pokemon1, pokemon2):
         st.write("---")
         st.write("Player's turn:")
 
-        attack_choice = st.selectbox("Select your attack:", ["Quick Attack", "Thunderbolt", "Iron Tail"])
+        if not state.attack_choice:
+            state.attack_choice = st.selectbox("Select your attack:", ["Quick Attack", "Thunderbolt", "Iron Tail"])
 
-        if attack_choice:
+        if state.attack_choice:
             damage = random.randint(10, 20)
             defender = pokemon2
 
-            if attack_choice == "Quick Attack":
+            if state.attack_choice == "Quick Attack":
                 st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
-            elif attack_choice == "Thunderbolt":
+            elif state.attack_choice == "Thunderbolt":
                 st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
-            elif attack_choice == "Iron Tail":
+            elif state.attack_choice == "Iron Tail":
                 st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
 
             defender.take_damage(damage)
             st.write(f"{pokemon1.name}: {pokemon1.health} HP")
             st.write(f"{pokemon2.name}: {pokemon2.health} HP")
+
+            state.attack_choice = None
 
         if pokemon2.health <= 0:
             break
@@ -84,6 +89,7 @@ def main():
     start_battle = st.button("Start Battle")
 
     if start_battle:
+        state.attack_choice = None
         battle(pokemon1, pokemon2)
 
 
