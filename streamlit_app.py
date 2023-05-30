@@ -79,7 +79,9 @@ def main():
     st.write("Welcome to the Pokemon Battle!")
     st.write(f"Today's battle is between {pokemon1.name} and {pokemon2.name}.")
 
-    if st.button("Start Battle"):
+    start_battle = st.button("Start Battle")
+
+    if start_battle:
         battle(pokemon1, pokemon2)
 
 
