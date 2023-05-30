@@ -55,6 +55,12 @@ def main():
     if "attack_outputs" not in st.session_state:
         st.session_state.attack_outputs = []
 
+    if "turn_counter" not in st.session_state:
+        st.session_state.turn_counter = 0
+
+    if "turn_count" not in st.session_state:
+        st.session_state.turn_count = 1
+
     if "creature1" not in st.session_state:
         st.session_state.creature1 = Creature(10, 100, 20, 30, 15, 10, 5, 50)
 
@@ -75,6 +81,14 @@ def main():
         st.cache_resource.clear()
         st.cache_data.clear()
         st.session_state.attack_outputs = []
+        st.session_state.turn_counter = 0
+        st.session_state.turn_count = 1
+
+    if st.button("Start"):
+    # Clears all st.cache_resource caches:
+        check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+        st.session_state.turn_counter += 1
+        st.session_state.turn_count += 1
 
     col1, col2 = st.columns(2)
 
@@ -84,14 +98,37 @@ def main():
             output = attack_one(st.session_state.creature1, st.session_state.creature2, move1)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
+
         if st.button(f"{move2.name}"):
             output = attack_two(st.session_state.creature1, st.session_state.creature2, move2)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
+
         if st.button(f"{move3.name}"):
             output = attack_three(st.session_state.creature1, st.session_state.creature2, move3)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
 
     with col2:
         st.header("Creature 2")
@@ -99,14 +136,37 @@ def main():
             output = attack_four(st.session_state.creature2, st.session_state.creature1, move4)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
+
         if st.button(f"{move5.name}"):
             output = attack_five(st.session_state.creature2, st.session_state.creature1, move5)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
+
         if st.button(f"{move6.name}"):
             output = attack_six(st.session_state.creature2, st.session_state.creature1, move6)
             st.session_state.attack_outputs.append(output)
             check_win_condition(st.session_state.creature1, st.session_state.creature2)
+
+            if st.session_state.turn_counter == 2:
+                check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
+                st.session_state.turn_counter = 0
+                st.session_state.turn_count += 1
+            else:
+                st.session_state.turn_counter += 1
 
     st.write("Attack Logs:")
     for output in st.session_state.attack_outputs:
@@ -142,6 +202,12 @@ def attack_six(attacker, defender, move):
     damage = attacker.attack(move, defender)
     return f"Creature 2 dealt {damage} damage to Creature 1. Creature 1 now has {defender.health} HP."
 
+def check_speed(creature1, creature2, turn_count):
+    st.session_state.attack_outputs.append(f"Turn {turn_count}")
+    if creature1.speed < creature2.speed:
+        st.session_state.attack_outputs.append("Creature 1 is slower. Creature 2 goes first this turn")
+    elif creature2.speed < creature1.speed:
+        st.session_state.attack_outputs.append("Creature 2 is slower. Creature 1 goes first this turn")
 
 def check_win_condition(creature1, creature2):
     if creature1.health <= 0:
