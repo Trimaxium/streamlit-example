@@ -15,7 +15,6 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-import streamlit as st
 import random
 from streamlit import session_state as state
 
@@ -38,26 +37,34 @@ def battle(pokemon1, pokemon2):
     while pokemon1.health > 0 and pokemon2.health > 0:
         st.write("---")
         st.write("Player's turn:")
+        st.write("Select your move:")
 
-        if not state.attack_choice:
-            state.attack_choice = st.selectbox("Select your attack:", ["Quick Attack", "Thunderbolt", "Iron Tail"])
-
-        if state.attack_choice:
+        if st.button("Quick Attack"):
             damage = random.randint(10, 20)
             defender = pokemon2
 
-            if state.attack_choice == "Quick Attack":
-                st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
-            elif state.attack_choice == "Thunderbolt":
-                st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
-            elif state.attack_choice == "Iron Tail":
-                st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
-
+            st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
             defender.take_damage(damage)
             st.write(f"{pokemon1.name}: {pokemon1.health} HP")
             st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
-            state.attack_choice = None
+        elif st.button("Thunderbolt"):
+            damage = random.randint(10, 20)
+            defender = pokemon2
+
+            st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
+            defender.take_damage(damage)
+            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
+            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
+
+        elif st.button("Iron Tail"):
+            damage = random.randint(10, 20)
+            defender = pokemon2
+
+            st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
+            defender.take_damage(damage)
+            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
+            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         if pokemon2.health <= 0:
             break
@@ -89,7 +96,6 @@ def main():
     start_battle = st.button("Start Battle")
 
     if start_battle:
-        state.attack_choice = None
         battle(pokemon1, pokemon2)
 
 
