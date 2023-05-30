@@ -68,7 +68,7 @@ def main():
 
     if st.button("Reset"):
     # Clears all st.cache_resource caches:
-    st.cache_resource.clear()
+        st.cache_resource.clear()
 
     col1, col2 = st.columns(2)
 
