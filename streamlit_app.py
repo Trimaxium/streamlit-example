@@ -59,6 +59,23 @@ class MoveType:
     Physical = 1
     Magic = 2
 
+class Action:
+    def perform_action():
+    # Action to be performed when the button is clicked
+    st.write("Button clicked!")
+
+    if move_choice == 1:
+        faster_creature.attack(move1, slower_creature)
+    elif move_choice == 2:
+        faster_creature.attack(move2, faster_creature)
+    elif move_choice == 3:
+        faster_creature.attack(move3, slower_creature)
+    else:
+        st.write("Invalid move choice. Try again.")
+
+    st.write(f"Creature 1 Health: {creature1.health}")
+    st.write(f"Creature 2 Health: {creature2.health}")
+
 
 creature1 = Creature(10, 100, 20, 30, 15, 10, 5, 50)
 creature2 = Creature(8, 80, 15, 25, 12, 8, 3, 60)
@@ -76,19 +93,9 @@ while creature1.health > 0 and creature2.health > 0:
     st.write(f"2. {move2.name}")
     st.write(f"3. {move3.name}")
 
-    move_choice = int(input("Enter your move (1-3): "))
+    move_choice = st.number_input("Enter your move (1-3): ", min_value=1, max_value=3, value=1, step=1)
 
-    if move_choice == 1:
-        faster_creature.attack(move1, slower_creature)
-    elif move_choice == 2:
-        faster_creature.attack(move2, faster_creature)
-    elif move_choice == 3:
-        faster_creature.attack(move3, slower_creature)
-    else:
-        st.write("Invalid move choice. Try again.")
-
-    st.write(f"Creature 1 Health: {creature1.health}")
-    st.write(f"Creature 2 Health: {creature2.health}")
+    st.button('Go', on_click=perform_action)
 
 if creature1.health > 0:
     st.write("Creature 1 wins!")
