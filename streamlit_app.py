@@ -3,12 +3,6 @@ import streamlit as st
 """
 # Welcome to Streamlit!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
 class Creature:
@@ -25,7 +19,7 @@ class Creature:
     def calculate_damage(self, move, defender):
         attack_stat = self.physical_attack if move.type == MoveType.Physical else self.magic_attack
         defense_stat = defender.armor if move.type == MoveType.Physical else defender.magic_resistance
-        damage = move.power * (attack_stat / defense_stat) * (self.level / defender.level) + 1
+        damage = move.power * (attack_stat / defense_stat) * (self.level / defender.level) + 2
         return int(damage)
 
     def calculate_healing(self, move):
@@ -92,15 +86,15 @@ def main():
     with col2:
         st.header("Creature 2")
         if st.button(f"{move4.name}"):
-            output = attack_four(creature1, creature2, move4)
+            output = attack_four(creature2, creature1, move4)
             st.session_state.attack_outputs.append(output)
             check_win_condition(creature1, creature2)
         if st.button(f"{move5.name}"):
-            output = attack_five(creature1, creature2, move5)
+            output = attack_five(creature2, creature1, move5)
             st.session_state.attack_outputs.append(output)
             check_win_condition(creature1, creature2)
         if st.button(f"{move6.name}"):
-            output = attack_six(creature1, creature2, move6)
+            output = attack_six(creature2, creature1, move6)
             st.session_state.attack_outputs.append(output)
             check_win_condition(creature1, creature2)
 
