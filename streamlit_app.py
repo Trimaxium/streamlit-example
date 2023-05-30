@@ -48,6 +48,13 @@ class Move:
 class MoveType:
     Physical = 1
     Magic = 2
+    
+move1 = Move("Fireball", 40, MoveType.Magic, False) # Define move1
+move2 = Move("Heal", 30, MoveType.Magic, True) # Define move2
+move3 = Move("Tackle", 20, MoveType.Physical, False) # Define move3
+move4 = Move("Firebolt", 40, MoveType.Magic, False)  # Define move4
+move5 = Move("Cure", 30, MoveType.Magic, True) # Define move5
+move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
 def main():
 
@@ -56,13 +63,6 @@ def main():
 
     if "creature2" not in st.session_state:
         st.session_state.creature2 = Creature(8, 80, 15, 25, 12, 8, 3, 60)
-
-    move1 = Move("Fireball", 40, MoveType.Magic, False) # Define move1
-    move2 = Move("Heal", 30, MoveType.Magic, True) # Define move2
-    move3 = Move("Tackle", 20, MoveType.Physical, False) # Define move3
-    move4 = Move("Firebolt", 40, MoveType.Magic, False)  # Define move4
-    move5 = Move("Cure", 30, MoveType.Magic, True) # Define move5
-    move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
     st.title("Test Battle")
 
