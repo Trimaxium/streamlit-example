@@ -18,7 +18,7 @@ def battle(pokemon1, pokemon2):
     st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
     # Rest of your battle logic
-     while pokemon1.health > 0 and pokemon2.health > 0:
+    while pokemon1.health > 0 and pokemon2.health > 0:
         st.write("---")
         st.write("Player's turn:")
         st.write("Select your move:")
