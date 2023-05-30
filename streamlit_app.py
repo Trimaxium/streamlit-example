@@ -15,93 +15,41 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-import random
-from streamlit import session_state as state
+def pokemon_battle(player1, player2):
+    st.write("Let the battle begin!")
+    st.write(f"Player 1: {player1}")
+    st.write(f"Player 2: {player2}")
+    st.write("")
 
-class Pokemon:
-    def __init__(self, name, health, attack):
-        self.name = name
-        self.health = health
-        self.attack = attack
+    while True:
+        # Player 1's turn
+        player1_move = st.text_input("Player 1, enter your move:")
+        st.write(f"Player 1 used {player1_move}!")
 
-    def take_damage(self, damage):
-        self.health -= damage
-        if self.health < 0:
-            self.health = 0
+        # Player 2's turn
+        player2_move = st.text_input("Player 2, enter your move:")
+        st.write(f"Player 2 used {player2_move}!")
+        st.write("")
 
-def battle(pokemon1, pokemon2):
-    st.write(f"Battle between {pokemon1.name} and {pokemon2.name} begins!")
-    st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-    st.write(f"{pokemon2.name}: {pokemon2.health} HP")
-
-    while pokemon1.health > 0 and pokemon2.health > 0:
-        st.write("---")
-        st.write("Player's turn:")
-        st.write("Select your move:")
-        
-        quick_attack = st.button("Quick Attack")
-        t_bolt = st.button("Thunderbolt")
-        i_tail = st.button("Iron Tail")
-
-        if quick_attack:
-            damage = random.randint(10, 20)
-            defender = pokemon2
-
-            st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
-            defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
-
-        elif t_bolt:
-            damage = random.randint(10, 20)
-            defender = pokemon2
-
-            st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
-            defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
-
-        elif i_tail:
-            damage = random.randint(10, 20)
-            defender = pokemon2
-
-            st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
-            defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
-
-        if pokemon2.health <= 0:
+        # Check for battle end conditions
+        if player1_move.lower() == "quit" or player2_move.lower() == "quit":
+            st.write("The battle has ended.")
             break
 
-        st.write("---")
-        st.write("Opponent's turn:")
-        damage = random.randint(10, 20)
-        defender = pokemon1
+        # Perform calculations (simplified)
+        # For example, you could add Pokémon health points, damage calculation, etc.
 
-        st.write(f"{pokemon2.name} used a random attack and dealt {damage} damage.")
-        defender.take_damage(damage)
-        st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-        st.write(f"{pokemon2.name}: {pokemon2.health} HP")
+        # Display results (simplified)
+        st.write("Results:")
+        st.write(f"{player1} used {player1_move} and dealt X damage.")
+        st.write(f"{player2} used {player2_move} and dealt Y damage.")
+        st.write("")
 
-    if pokemon1.health > 0:
-        st.write(f"{pokemon1.name} wins the battle!")
-    else:
-        st.write(f"{pokemon2.name} wins the battle!")
+# Main app
+st.title("Pokémon Battle")
+player1_name = st.text_input("Player 1, enter your name:")
+player2_name = st.text_input("Player 2, enter your name:")
 
-def main():
-    st.title("Pokemon Battle")
+if player1_name and player2_name:
+    pokemon_battle(player1_name, player2_name)
 
-    pokemon1 = Pokemon("Pikachu", 100, 20)
-    pokemon2 = Pokemon("Charizard", 120, 18)
-
-    st.write("Welcome to the Pokemon Battle!")
-    st.write(f"Today's battle is between {pokemon1.name} and {pokemon2.name}.")
-
-    start_battle = st.button("Start Battle")
-
-    if start_battle:
-        battle(pokemon1, pokemon2)
-
-
-if __name__ == "__main__":
-    main()
