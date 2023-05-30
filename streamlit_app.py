@@ -62,16 +62,15 @@ class MoveType:
 class Action:
     def perform_action():
     # Action to be performed when the button is clicked
-    st.write("Button clicked!")
-
-    if move_choice == 1:
-        faster_creature.attack(move1, slower_creature)
-    elif move_choice == 2:
-        faster_creature.attack(move2, faster_creature)
-    elif move_choice == 3:
-        faster_creature.attack(move3, slower_creature)
-    else:
-        st.write("Invalid move choice. Try again.")
+    
+        if move_choice == 1:
+            faster_creature.attack(move1, slower_creature)
+        elif move_choice == 2:
+            faster_creature.attack(move2, faster_creature)
+        elif move_choice == 3:
+            faster_creature.attack(move3, slower_creature)
+        else:
+            st.write("Invalid move choice. Try again.")
 
     st.write(f"Creature 1 Health: {creature1.health}")
     st.write(f"Creature 2 Health: {creature2.health}")
