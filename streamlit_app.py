@@ -59,9 +59,8 @@ class MoveType:
     Physical = 1
     Magic = 2
 
-class Action:
-    def perform_action():
-    # Action to be performed when the button is clicked
+def perform_action():
+# Action to be performed when the button is clicked
     
         if move_choice == 1:
             faster_creature.attack(move1, slower_creature)
