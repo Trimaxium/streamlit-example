@@ -40,11 +40,11 @@ class Creature:
         if move.is_healing_move:
             healing_amount = self.calculate_healing(move)
             self.health += healing_amount
-            print(f"Creature healed for {healing_amount} health.")
+            st.write(f"Creature healed for {healing_amount} health.")
         else:
             damage_amount = self.calculate_damage(move, defender)
             defender.health -= damage_amount
-            print(f"Creature dealt {damage_amount} damage to the opponent.")
+            st.write(f"Creature dealt {damage_amount} damage to the opponent.")
 
 
 class Move:
@@ -60,58 +60,35 @@ class MoveType:
     Magic = 2
 
 
-creature1 = Creature(10, 100, 20, 30, 15, 10, 5, 50)
-creature2 = Creature(8, 80, 15, 25, 12, 8, 3, 60)
+def main():
+    creature1 = Creature(10, 100, 20, 30, 15, 10, 5, 50)
+    creature2 = Creature(8, 80, 15, 25, 12, 8, 3, 60)
 
-move1 = Move("Fireball", 40, MoveType.Magic, False)
-move2 = Move("Heal", 30, MoveType.Magic, True)
-move3 = Move("Tackle", 20, MoveType.Physical, False)
+    move1 = Move("Fireball", 40, MoveType.Magic, False)
+    move2 = Move("Heal", 30, MoveType.Magic, True)
+    move3 = Move("Tackle", 20, MoveType.Physical, False)
 
-while creature1.health > 0 and creature2.health > 0:
-    faster_creature = creature1 if creature1.speed > creature2.speed else creature2
-    slower_creature = creature2 if faster_creature == creature1 else creature1
+    st.title("Pokemon Battle")
 
-    print(f"\n{faster_creature}'s turn:")
-    print(f"1. {move1.name}")
-    print(f"2. {move2.name}")
-    print(f"3. {move3.name}")
+    while creature1.health > 0 and creature2.health > 0:
+        faster_creature = creature1 if creature1.speed > creature2.speed else creature2
+        slower_creature = creature2 if faster_creature == creature1 else creature1
 
-    move_choice = int(input("Enter your move (1-3): "))
+        st.write(f"\n{faster_creature}'s turn:")
+        st.write(f"1. {move1.name}")
+        st.write(f"2. {move2.name}")
+        st.write(f"3. {move3.name}")
 
-    if move_choice == 1:
-        faster_creature.attack(move1, slower_creature)
-    elif move_choice == 2:
-        faster_creature.attack(move2, faster_creature)
-    elif move_choice == 3:
-        faster_creature.attack(move3, slower_creature)
-    else:
-        print("Invalid move choice. Try again.")
+        move_choice = st.number_input("Enter your move (1-3): ", min_value=1, max_value=3, value=1, step=1)
 
-    print(f"Creature 1 Health: {creature1.health}")
-    print(f"Creature 2 Health: {creature2.health}")
+        if move_choice == 1:
+            faster_creature.attack(move1, slower_creature)
+        elif move_choice == 2:
+            faster_creature.attack(move2, faster_creature)
+        elif move_choice == 3:
+            faster_creature.attack(move3, slower_creature)
+        else:
+            st.write("Invalid move choice. Try again.")
 
-if creature1.health > 0:
-    print("Creature 1 wins!")
-else:
-    print("Creature 2 wins!")
-
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
-
-    Point = namedtuple('Point', 'x y')
-    data = []
-
-    points_per_turn = total_points / num_turns
-
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
-
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+        st.write(f"Creature 1 Health: {creature1.health}")
+        st.write(f"Creature 2 Health: {creature2.health
