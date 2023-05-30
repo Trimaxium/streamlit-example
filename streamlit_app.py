@@ -51,6 +51,10 @@ class MoveType:
 
 def main():
 
+    # Initialize attack_outputs list if not already present in session_state
+    if "attack_outputs" not in st.session_state:
+        st.session_state.attack_outputs = []
+
     if "creature1" not in st.session_state:
         st.session_state.creature1 = Creature(10, 100, 20, 30, 15, 10, 5, 50)
 
@@ -70,12 +74,9 @@ def main():
     # Clears all st.cache_resource caches:
         st.cache_resource.clear()
         st.cache_data.clear()
+        st.session_state.attack_outputs = []
 
     col1, col2 = st.columns(2)
-
-    # Initialize attack_outputs list if not already present in session_state
-    if "attack_outputs" not in st.session_state:
-        st.session_state.attack_outputs = []
 
     with col1:
         st.header("Creature 1")
