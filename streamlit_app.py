@@ -23,7 +23,7 @@ class Creature:
         return int(damage)
 
     def calculate_healing(self, move):
-        healing = (move.power * self.faith) / ((self.leveAiml / 3.0) + 1)
+        healing = (move.power * self.faith) / ((self.level / 3.0) + 1)
         return int(healing)
 
     def attack(self, move, defender):
