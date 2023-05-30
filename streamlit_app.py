@@ -36,20 +36,23 @@ def battle(pokemon1, pokemon2):
     while pokemon1.health > 0 and pokemon2.health > 0:
         st.write("---")
         st.write("Player's turn:")
+
         attack_choice = st.selectbox("Select your attack:", ["Quick Attack", "Thunderbolt", "Iron Tail"])
-        damage = random.randint(10, 20)
-        defender = pokemon2
 
-        if attack_choice == "Quick Attack":
-            st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
-        elif attack_choice == "Thunderbolt":
-            st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
-        elif attack_choice == "Iron Tail":
-            st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
+        if attack_choice:
+            damage = random.randint(10, 20)
+            defender = pokemon2
 
-        defender.take_damage(damage)
-        st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-        st.write(f"{pokemon2.name}: {pokemon2.health} HP")
+            if attack_choice == "Quick Attack":
+                st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
+            elif attack_choice == "Thunderbolt":
+                st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
+            elif attack_choice == "Iron Tail":
+                st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
+
+            defender.take_damage(damage)
+            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
+            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         if pokemon2.health <= 0:
             break
@@ -68,7 +71,6 @@ def battle(pokemon1, pokemon2):
         st.write(f"{pokemon1.name} wins the battle!")
     else:
         st.write(f"{pokemon2.name} wins the battle!")
-
 
 def main():
     st.title("Pokemon Battle")
