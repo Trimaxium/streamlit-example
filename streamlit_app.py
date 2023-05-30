@@ -25,11 +25,11 @@ class Creature:
     def calculate_damage(self, move, defender):
         attack_stat = self.physical_attack if move.type == MoveType.Physical else self.magic_attack
         defense_stat = defender.armor if move.type == MoveType.Physical else defender.magic_resistance
-        damage = move.power * (attack_stat / defense_stat) * (self.level / defender.level) + 2
+        damage = move.power * (attack_stat / defense_stat) * (self.level / defender.level) + 1
         return int(damage)
 
     def calculate_healing(self, move):
-        healing = (move.power * self.faith) / ((self.level / 3.0) + 1)
+        healing = (move.power * self.faith) / ((self.leveAiml / 3.0) + 1)
         return int(healing)
 
     def attack(self, move, defender):
