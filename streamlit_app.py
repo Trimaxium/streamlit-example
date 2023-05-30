@@ -38,8 +38,12 @@ def battle(pokemon1, pokemon2):
         st.write("---")
         st.write("Player's turn:")
         st.write("Select your move:")
+        
+        quick_attack = st.button("Quick Attack")
+        t_bolt = st.button("Thunderbolt")
+        i_tail = st.button("Iron Tail")
 
-        if st.button("Quick Attack"):
+        if quick_attack:
             damage = random.randint(10, 20)
             defender = pokemon2
 
@@ -48,7 +52,7 @@ def battle(pokemon1, pokemon2):
             st.write(f"{pokemon1.name}: {pokemon1.health} HP")
             st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
-        elif st.button("Thunderbolt"):
+        elif t_bolt:
             damage = random.randint(10, 20)
             defender = pokemon2
 
@@ -57,7 +61,7 @@ def battle(pokemon1, pokemon2):
             st.write(f"{pokemon1.name}: {pokemon1.health} HP")
             st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
-        elif st.button("Iron Tail"):
+        elif i_tail:
             damage = random.randint(10, 20)
             defender = pokemon2
 
