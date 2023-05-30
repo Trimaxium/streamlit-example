@@ -48,13 +48,6 @@ class Move:
 class MoveType:
     Physical = 1
     Magic = 2
-    
-move1 = Move("Fireball", 40, MoveType.Magic, False) # Define move1
-move2 = Move("Heal", 30, MoveType.Magic, True) # Define move2
-move3 = Move("Tackle", 20, MoveType.Physical, False) # Define move3
-move4 = Move("Firebolt", 40, MoveType.Magic, False)  # Define move4
-move5 = Move("Cure", 30, MoveType.Magic, True) # Define move5
-move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
 def main():
 
@@ -63,6 +56,13 @@ def main():
 
     if "creature2" not in st.session_state:
         st.session_state.creature2 = Creature(8, 80, 15, 25, 12, 8, 3, 60)
+
+    move1 = Move("Fireball", 40, MoveType.Magic, False) # Define move1
+    move2 = Move("Heal", 30, MoveType.Magic, True) # Define move2
+    move3 = Move("Tackle", 20, MoveType.Physical, False) # Define move3
+    move4 = Move("Firebolt", 40, MoveType.Magic, False)  # Define move4
+    move5 = Move("Cure", 30, MoveType.Magic, True) # Define move5
+    move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
     st.title("Test Battle")
 
@@ -80,32 +80,32 @@ def main():
     with col1:
         st.header("Creature 1")
         if st.button(f"{move1.name}"):
-            output = attack_one(creature1, creature2, move1)
+            output = attack_one(st.session_state.creature1, st.session_state.creature2, move1)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
         if st.button(f"{move2.name}"):
-            output = attack_two(creature1, creature2, move2)
+            output = attack_two(st.session_state.creature1, st.session_state.creature2, move2)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
         if st.button(f"{move3.name}"):
-            output = attack_three(creature1, creature2, move3)
+            output = attack_three(st.session_state.creature1, st.session_state.creature2, move3)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
 
     with col2:
         st.header("Creature 2")
         if st.button(f"{move4.name}"):
-            output = attack_four(creature2, creature1, move4)
+            output = attack_four(st.session_state.creature2, st.session_state.creature1, move4)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
         if st.button(f"{move5.name}"):
-            output = attack_five(creature2, creature1, move5)
+            output = attack_five(st.session_state.creature2, st.session_state.creature1, move5)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
         if st.button(f"{move6.name}"):
-            output = attack_six(creature2, creature1, move6)
+            output = attack_six(st.session_state.creature2, st.session_state.creature1, move6)
             st.session_state.attack_outputs.append(output)
-            check_win_condition(creature1, creature2)
+            check_win_condition(st.session_state.creature1, st.session_state.creature2)
 
     st.write("Attack Logs:")
     for output in st.session_state.attack_outputs:
