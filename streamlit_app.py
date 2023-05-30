@@ -15,6 +15,9 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+import streamlit as st
+
+
 class Creature:
     def __init__(self, level, health, physical_attack, magic_attack, armor, magic_resistance, faith, speed):
         self.level = level
@@ -91,4 +94,13 @@ def main():
             st.write("Invalid move choice. Try again.")
 
         st.write(f"Creature 1 Health: {creature1.health}")
-        st.write(f"Creature 2 Health: {creature2.health
+        st.write(f"Creature 2 Health: {creature2.health}")
+
+    if creature1.health > 0:
+        st.write("Creature 1 wins!")
+    else:
+        st.write("Creature 2 wins!")
+
+
+if __name__ == "__main__":
+    main()
