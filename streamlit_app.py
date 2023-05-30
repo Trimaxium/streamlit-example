@@ -15,41 +15,23 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-def pokemon_battle(player1, player2):
-    st.write("Let the battle begin!")
-    st.write(f"Player 1: {player1}")
-    st.write(f"Player 2: {player2}")
-    st.write("")
+import random
+import streamlit as st
+from pokemon import Pokemon, battle
 
-    while True:
-        # Player 1's turn
-        player1_move = st.text_input("Player 1, enter your move:")
-        st.write(f"Player 1 used {player1_move}!")
+def main():
+    st.title("Pokemon Battle")
 
-        # Player 2's turn
-        player2_move = st.text_input("Player 2, enter your move:")
-        st.write(f"Player 2 used {player2_move}!")
-        st.write("")
+    pokemon1 = Pokemon("Pikachu", 100, 20)
+    pokemon2 = Pokemon("Charizard", 120, 18)
 
-        # Check for battle end conditions
-        if player1_move.lower() == "quit" or player2_move.lower() == "quit":
-            st.write("The battle has ended.")
-            break
+    st.write("Welcome to the Pokemon Battle!")
+    st.write(f"Today's battle is between {pokemon1.name} and {pokemon2.name}.")
 
-        # Perform calculations (simplified)
-        # For example, you could add Pokémon health points, damage calculation, etc.
+    start_battle = st.button("Start Battle")
 
-        # Display results (simplified)
-        st.write("Results:")
-        st.write(f"{player1} used {player1_move} and dealt X damage.")
-        st.write(f"{player2} used {player2_move} and dealt Y damage.")
-        st.write("")
+    if start_battle:
+        battle(pokemon1, pokemon2)
 
-# Main app
-st.title("Pokémon Battle")
-player1_name = st.text_input("Player 1, enter your name:")
-player2_name = st.text_input("Player 2, enter your name:")
-
-if player1_name and player2_name:
-    pokemon_battle(player1_name, player2_name)
-
+if __name__ == "__main__":
+    main()
