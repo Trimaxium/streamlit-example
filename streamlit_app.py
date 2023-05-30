@@ -76,7 +76,7 @@ while creature1.health > 0 and creature2.health > 0:
     st.write(f"2. {move2.name}")
     st.write(f"3. {move3.name}")
 
-    move_choice = st.selectbox("Select your move:", ["1", "2", "3"], index=0)
+    move_choice = int(input("Enter your move (1-3): "))
 
     if move_choice == 1:
         faster_creature.attack(move1, slower_creature)
