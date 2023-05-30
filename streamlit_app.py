@@ -15,7 +15,6 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-import streamlit as st
 import random
 
 class Pokemon:
@@ -35,16 +34,35 @@ def battle(pokemon1, pokemon2):
     st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
     while pokemon1.health > 0 and pokemon2.health > 0:
-        attacker = random.choice([pokemon1, pokemon2])
-        defender = pokemon2 if attacker == pokemon1 else pokemon1
-
+        st.write("---")
+        st.write("Player's turn:")
+        attack_choice = st.selectbox("Select your attack:", ["Quick Attack", "Thunderbolt", "Iron Tail"])
         damage = random.randint(10, 20)
-        defender.take_damage(damage)
+        defender = pokemon2
 
-        st.write(f"{attacker.name} attacked {defender.name} and dealt {damage} damage.")
+        if attack_choice == "Quick Attack":
+            st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
+        elif attack_choice == "Thunderbolt":
+            st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
+        elif attack_choice == "Iron Tail":
+            st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
+
+        defender.take_damage(damage)
         st.write(f"{pokemon1.name}: {pokemon1.health} HP")
         st.write(f"{pokemon2.name}: {pokemon2.health} HP")
+
+        if pokemon2.health <= 0:
+            break
+
         st.write("---")
+        st.write("Opponent's turn:")
+        damage = random.randint(10, 20)
+        defender = pokemon1
+
+        st.write(f"{pokemon2.name} used a random attack and dealt {damage} damage.")
+        defender.take_damage(damage)
+        st.write(f"{pokemon1.name}: {pokemon1.health} HP")
+        st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
     if pokemon1.health > 0:
         st.write(f"{pokemon1.name} wins the battle!")
