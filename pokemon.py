@@ -18,11 +18,11 @@ def battle(pokemon1, pokemon2):
     st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
     # Rest of your battle logic
-    while pokemon1.health > 0 and pokemon2.health > 0:
+     while pokemon1.health > 0 and pokemon2.health > 0:
         st.write("---")
         st.write("Player's turn:")
         st.write("Select your move:")
-        
+
         quick_attack = st.button("Quick Attack")
         t_bolt = st.button("Thunderbolt")
         i_tail = st.button("Iron Tail")
@@ -33,8 +33,6 @@ def battle(pokemon1, pokemon2):
 
             st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
             defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         elif t_bolt:
             damage = random.randint(10, 20)
@@ -42,8 +40,6 @@ def battle(pokemon1, pokemon2):
 
             st.write(f"{pokemon1.name} used Thunderbolt and dealt {damage} damage.")
             defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         elif i_tail:
             damage = random.randint(10, 20)
@@ -51,8 +47,6 @@ def battle(pokemon1, pokemon2):
 
             st.write(f"{pokemon1.name} used Iron Tail and dealt {damage} damage.")
             defender.take_damage(damage)
-            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
-            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         if pokemon2.health <= 0:
             break
@@ -64,6 +58,7 @@ def battle(pokemon1, pokemon2):
 
         st.write(f"{pokemon2.name} used a random attack and dealt {damage} damage.")
         defender.take_damage(damage)
+
         st.write(f"{pokemon1.name}: {pokemon1.health} HP")
         st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
