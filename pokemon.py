@@ -33,6 +33,17 @@ def battle(pokemon1, pokemon2):
 
             st.write(f"{pokemon1.name} used Quick Attack and dealt {damage} damage.")
             defender.take_damage(damage)
+            
+            st.write("---")
+            st.write("Opponent's turn:")
+            damage = random.randint(10, 20)
+            defender = pokemon1
+
+            st.write(f"{pokemon2.name} used a random attack and dealt {damage} damage.")
+            defender.take_damage(damage)
+
+            st.write(f"{pokemon1.name}: {pokemon1.health} HP")
+            st.write(f"{pokemon2.name}: {pokemon2.health} HP")
 
         elif t_bolt:
             damage = random.randint(10, 20)
