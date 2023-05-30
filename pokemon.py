@@ -1,3 +1,6 @@
+import random
+import streamlit as st
+
 class Pokemon:
     def __init__(self, name, health, attack):
         self.name = name
