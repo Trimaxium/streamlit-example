@@ -101,7 +101,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -113,7 +113,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -125,7 +125,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -139,7 +139,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -151,7 +151,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -163,7 +163,7 @@ def main():
 
             if st.session_state.turn_counter == 2:
                 check_speed(st.session_state.creature1, st.session_state.creature2, st.session_state.turn_count)
-                st.session_state.turn_counter = 0
+                st.session_state.turn_counter = 1
                 st.session_state.turn_count += 1
             else:
                 st.session_state.turn_counter += 1
@@ -203,11 +203,10 @@ def attack_six(attacker, defender, move):
     return f"Creature 2 dealt {damage} damage to Creature 1. Creature 1 now has {defender.health} HP."
 
 def check_speed(creature1, creature2, turn_count):
-    st.session_state.attack_outputs.append(f"Turn {turn_count}")
     if creature1.speed < creature2.speed:
-        st.session_state.attack_outputs.append("Creature 1 is slower. Creature 2 goes first this turn")
+        st.session_state.attack_outputs.append(f"Turn {turn_count}! Creature 1 is slower. Creature 2 goes first.")
     elif creature2.speed < creature1.speed:
-        st.session_state.attack_outputs.append("Creature 2 is slower. Creature 1 goes first this turn")
+        st.session_state.attack_outputs.append(f"Turn {turn_count}! Creature 2 is slower. Creature 1 goes first.")
 
 def check_win_condition(creature1, creature2):
     if creature1.health <= 0:
