@@ -74,6 +74,21 @@ def main():
     move5 = Move("Cure", 30, MoveType.Magic, True) # Define move5
     move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
+    st.sidebar.header("Creature 1")
+        creature1_level = st.sidebar.number_input("Level", min_value=1, value=100)
+        creature1_health = st.sidebar.number_input("Health", min_value=1, value=100)
+        creature1_physical_attack = st.sidebar.number_input("Physical Attack", min_value=1, value=100)
+        creature1_magic_attack = st.sidebar.number_input("Magic Attack", min_value=1, value=100)
+        creature1_armor = st.sidebar.number_input("Armor", min_value=1, value=100)
+        creature1_magic_resistance = st.sidebar.number_input("Magic Resistance", min_value=1, value=100)
+        creature1_faith = st.sidebar.number_input("Faith", min_value=1, value=100)
+        creature1_speed = st.sidebar.number_input("Speed", min_value=1, value=100)
+
+        st.session_state.creature1 = Creature(
+            creature1_level, creature1_health, creature1_physical_attack, creature1_magic_attack,
+            creature1_armor, creature1_magic_resistance, creature1_faith, creature1_speed
+        )
+
     st.title("Test Battle")
 
     if st.button("Reset"):
