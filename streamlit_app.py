@@ -1,7 +1,7 @@
 import streamlit as st
 
 """
-# Welcome to Streamlit!
+# Battler Calculator!
 
 """
 
@@ -75,16 +75,28 @@ def main():
     move6 = Move("Rush", 20, MoveType.Physical, False) # Define move6
 
     st.sidebar.header("Creature 1")
-    creature1_level = st.sidebar.number_input("Level", min_value=1, value=100)
-    creature1_health = st.sidebar.number_input("Health", min_value=1, value=100)
-    creature1_physical_attack = st.sidebar.number_input("Physical Attack", min_value=1, value=100)
-    creature1_magic_attack = st.sidebar.number_input("Magic Attack", min_value=1, value=100)
-    creature1_armor = st.sidebar.number_input("Armor", min_value=1, value=100)
-    creature1_magic_resistance = st.sidebar.number_input("Magic Resistance", min_value=1, value=100)
-    creature1_faith = st.sidebar.number_input("Faith", min_value=1, value=100)
-    creature1_speed = st.sidebar.number_input("Speed", min_value=1, value=100)
+    creature1_level = st.sidebar.number_input("C1 Level", min_value=1, value=100)
+    creature1_health = st.sidebar.number_input("C1 Health", min_value=1, value=100)
+    creature1_physical_attack = st.sidebar.number_input("C1 Physical Attack", min_value=1, value=100)
+    creature1_magic_attack = st.sidebar.number_input("C1 Magic Attack", min_value=1, value=100)
+    creature1_armor = st.sidebar.number_input("C1 Armor", min_value=1, value=100)
+    creature1_magic_resistance = st.sidebar.number_input("C1 Magic Resistance", min_value=1, value=100)
+    creature1_faith = st.sidebar.number_input("C1 Faith", min_value=1, value=100)
+    creature1_speed = st.sidebar.number_input("C1 Speed", min_value=1, value=100)
 
     st.session_state.creature1 = Creature(creature1_level, creature1_health, creature1_physical_attack, creature1_magic_attack, creature1_armor, creature1_magic_resistance, creature1_faith, creature1_speed)
+
+    st.sidebar.header("Creature 2")
+    creature2_level = st.sidebar.number_input("C2 Level", min_value=1, value=100)
+    creature2_health = st.sidebar.number_input("C2 Health", min_value=1, value=100)
+    creature2_physical_attack = st.sidebar.number_input("C2 Physical Attack", min_value=1, value=100)
+    creature2_magic_attack = st.sidebar.number_input("C2 Magic Attack", min_value=1, value=100)
+    creature2_armor = st.sidebar.number_input("C2 Armor", min_value=1, value=100)
+    creature2_magic_resistance = st.sidebar.number_input("C2 Magic Resistance", min_value=1, value=100)
+    creature2_faith = st.sidebar.number_input("C2 Faith", min_value=1, value=100)
+    creature2_speed = st.sidebar.number_input("C2 Speed", min_value=1, value=100)
+
+    st.session_state.creature2 = Creature(creature2_level, creature2_health, creature2_physical_attack, creature2_magic_attack, creature2_armor, creature2_magic_resistance, creature2_faith, creature2_speed)
 
     st.title("Test Battle")
 
